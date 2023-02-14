@@ -10,7 +10,7 @@ public class User {
 	
 	
 	SimpleDateFormat formater = new SimpleDateFormat("dd-MM-yyyy");
-	private  long id;
+	private  int id;
 	private String prenom;
 	private String nom;
 	private int age;

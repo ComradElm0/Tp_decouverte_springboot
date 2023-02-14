@@ -10,6 +10,7 @@
         <br/>
         <label>Prenom</label>
         <input type="text" th:field="*{prenom}"/>
+        <input type="hidden" th:field="*{id}" />
         <br/>
         <!--
         <label>Age</label>
@@ -17,6 +18,8 @@
         <br/>
         -->
         <input type="submit" value="Submit" />
+        <br/>
+        <a href="/users/list">Liste</a>
     </form>
 </body>
 </html>
