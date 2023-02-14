@@ -7,8 +7,10 @@ import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
 @Data
 public class User {
-
+	
+	
 	SimpleDateFormat formater = new SimpleDateFormat("dd-MM-yyyy");
+	private  long id;
 	private String prenom;
 	private String nom;
 	private int age;
