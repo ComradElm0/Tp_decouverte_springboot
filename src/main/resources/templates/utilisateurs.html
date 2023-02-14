@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
     <title>Fiche user</title>
@@ -7,6 +7,12 @@
 <body>
     <h1>Nom = <span th:text="${current_user.nom}"></span></h1>
     <h2>Prénom = <span th:text="${current_user.prenom}"></span></h2>
+    <!--
     <h3>Naissance = <span th:text="${current_user.naissance}"</h3>
+-->
+    <a href="/users/modify">Ajout</a>
+<br/>
+    <a href="/hello/about">about</a>
+
 </body>
 </html>
