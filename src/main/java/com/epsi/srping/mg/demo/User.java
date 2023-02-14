@@ -9,10 +9,10 @@ import java.time.ZonedDateTime;
 public class User {
 
 	SimpleDateFormat formater = new SimpleDateFormat("dd-MM-yyyy");
-	private String prenom= "Elmo";
-	private String nom="Comrad";
-	private int age=29;
-	private String civilitee="FR";
+	private String prenom;
+	private String nom;
+	private int age;
+	private String civilitee;
 	private LocalDateTime naissance;
 	private ZonedDateTime creeLe = ZonedDateTime.now();
 	private ZonedDateTime maj = ZonedDateTime.now();

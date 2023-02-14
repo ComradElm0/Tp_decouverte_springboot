@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+    <form method="POST" th:action="@{/users/save}" th:object="${current_user}">
+        <label>Nom</label>
+        <input type="text" th:field="*{nom}"/>
+        <br/>
+        <label>Prenom</label>
+        <input type="text" th:field="*{prenom}"/>
+        <br/>
+        <!--
+        <label>Age</label>
+        <input type="number" th:field="*{age}">
+        <br/>
+        -->
+        <input type="submit" value="Submit" />
+    </form>
+</body>
+</html>
