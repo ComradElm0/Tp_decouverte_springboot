@@ -1,18 +1,24 @@
-package com.epsi.srping.mg.demo;
+package com.epsi.srping.mg.demo.entitees;
 
 import lombok.Data;
 
+import javax.persistence.*;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
 @Data
+@Entity
+@Table(name="sys_user")
 public class User {
 	
-	
-	SimpleDateFormat formater = new SimpleDateFormat("dd-MM-yyyy");
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private  int id;
+	@Column(nullable = false)
 	private String prenom;
+	@Column(nullable = false)
 	private String nom;
+	
 	private int age;
 	private String civilitee;
 	private LocalDateTime naissance;

@@ -1,74 +1,74 @@
 package com.epsi.srping.mg.demo.controllers;
 
-import com.epsi.srping.mg.demo.User;
+import com.epsi.srping.mg.demo.entitees.User;
+import com.epsi.srping.mg.demo.repositories.UtilisateurRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import com.epsi.srping.mg.demo.DataUser;
-
-import java.time.LocalDateTime;
-import java.util.ArrayList;
 
 import static com.epsi.srping.mg.demo.controllers.Constantes.*;
 
 @Controller
 @RequestMapping("/users")
 public class UserController {
-	protected User currentUser = new User();
+	//protected User currentUser = new User();
 	//private ArrayList<User> database = new ArrayList<>();
 	//protected DataUser database;
-	public UserController() {
-		database.add(new User().setNom("Comrad").setPrenom("Elmo").setId(1));
-		database.add(new User().setNom("Jerusalem").setPrenom("Ninnin").setId(2));
-		database.add(new User().setNom("Fly").setPrenom("Lord").setId(3));
-		database.add(new User().setNom("Croche").setPrenom("Sarah").setId(4));
+	private UtilisateurRepository repository;
+	
+	public UserController(UtilisateurRepository repository) {
+		this.repository = repository;
+		
+		this.repository.save(new User().setNom("Lécu").setPrenom("Annick"));
+		this.repository.save(new User().setNom("Bar").setPrenom("Lenny"));
+		this.repository.save(new User().setNom("Croche").setPrenom("Sarah"));
+		this.repository.save(new User().setNom("Culé").setPrenom("Allan"));
+		this.repository.save(new User().setNom("Pelle").setPrenom("Sarah"));
+		this.repository.save(new User().setNom("Tim").setPrenom("Vincent"));
 	}
 	
 	
 	@GetMapping(ROUTE_SHOW)
 	public String affichageUser(Model model, @PathVariable("id") int id){
-		User rechUtil = this.rechParId(id);
-		if (rechUtil != null) {
-			model.addAttribute(USER_MODEL, rechUtil);
-		}
+		User test = this.repository.findById(id).orElse(new User());
+		
+		
+		model.addAttribute(MODEL_ONE,test);
+
 		return "utilisateurs";
 	}
 	
 	@GetMapping(ROUTE_CREATE)
-	public String ajoutUser(Model model, @PathVariable("id") int id){
+	public String ajoutUser(Model model){
 		
-		/*currentUser.setNom("Nom");
-		currentUser.setPrenom("Prenom");
-		currentUser.setAge(0);*/
-		database.add(new User().setId(1).setNom("Comrad").setPrenom("Elmo"));
-		database.add(new User().setId(2).setNom("Jerusalem").setPrenom("Ninnin"));
-		//nouvUser.setNaissance(LocalDateTime.parse("Date de naissance: yyyy-MM-dd"));
-		model.addAttribute(USER_MODEL,currentUser);
-		database.add(currentUser);
+		User rechUtil = this.repository.findById(id).orElse(new User());
+		model.addAttribute(MODEL_ONE,rechUtil);
+		this.repository.save(rechUtil);
 		return "ajoututilisateur";
 	}
 	
 	@PostMapping(ROUTE_SAVE)
 	public String formulaireRempli(@ModelAttribute User utilisateurHydrated,Model model){
-		User rechUtil = this.rechParId(utilisateurHydrated.getId());
+		User rechUtil = this.repository.findById(utilisateurHydrated.getId()).orElse(new User());
 		if (rechUtil !=null){
-			rechUtil.setNom(utilisateurHydrated.getNom());
-			rechUtil.setPrenom(utilisateurHydrated.getPrenom());
+			this.repository.save(rechUtil.setNom(utilisateurHydrated.getNom())) ;
+			this.repository.save(rechUtil.setPrenom(utilisateurHydrated.getPrenom())) ;
 		}
-		return "redirect:/users/"+ rechUtil.getId()+"/utilisateurs";
+		return "redirect:/users/"+ rechUtil.getId() + "/show";
 	}
 	@GetMapping(ROUTE_LIST)
 	public String listeUtilisateurs(Model model){
-		model.addAttribute(USERS_MODEL,database);
+		model.addAttribute(MODEL_ALL,this.repository.findAll());
 		return "liste";
 	}
+	
 	@GetMapping(ROUTE_MOD)
 	public String modifUtilisateur(Model model,@PathVariable("id")int id){
-		User rechUtil = this.rechParId(id);
-		model.addAttribute(USER_MODEL, rechUtil);
-		return "utilisateurs";
+		User rechUtil = this.repository.findById(id).orElse(new User());
+		model.addAttribute(MODEL_ONE, rechUtil);
+		return "ajoututilisateur";
 	}
-	
+	/*
 	private User rechParId(int id){
 		User rechUtil = null;
 		for (User user: this.database) {
@@ -79,9 +79,5 @@ public class UserController {
 		}
 		return rechUtil;
 	}
+	*/
 }
-
-/*User currentUser= new User();
-		currentUser.setPrenom("Elmo");
-		currentUser.setNom("Comrad");
-		currentUser.setNaissance(LocalDateTime.parse("1994-02-11T13:21:35"));*/
