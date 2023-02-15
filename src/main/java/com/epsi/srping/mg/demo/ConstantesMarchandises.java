@@ -8,5 +8,6 @@ public class ConstantesMarchandises {
 	public static final String STOCK_DEL ="/crm/retraitStock";
 	public static final String STOCK_SHOW ="/crm/stock";
 	
+	public static final String MARCHANDISE_ACTUELLE = "marchandise_actuelle";
 	private ConstantesMarchandises() {}
 }
