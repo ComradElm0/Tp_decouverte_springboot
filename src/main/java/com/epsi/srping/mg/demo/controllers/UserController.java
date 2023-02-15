@@ -15,7 +15,7 @@ import static com.epsi.srping.mg.demo.controllers.Constantes.*;
 @RequestMapping("/users")
 public class UserController {
 	protected User currentUser = new User();
-	private ArrayList<User> database = new ArrayList<>();
+	//private ArrayList<User> database = new ArrayList<>();
 	//protected DataUser database;
 	public UserController() {
 		database.add(new User().setNom("Comrad").setPrenom("Elmo").setId(1));
