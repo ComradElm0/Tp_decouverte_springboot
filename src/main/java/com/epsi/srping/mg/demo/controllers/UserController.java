@@ -41,9 +41,9 @@ public class UserController {
 	@GetMapping(ROUTE_CREATE)
 	public String ajoutUser(Model model){
 		
-		User rechUtil = this.repository.findById(id).orElse(new User());
+		User rechUtil =this.repository.save(new User().setNom("").setPrenom(""));
 		model.addAttribute(MODEL_ONE,rechUtil);
-		this.repository.save(rechUtil);
+		//this.repository.save(rechUtil);
 		return "ajoututilisateur";
 	}
 	
