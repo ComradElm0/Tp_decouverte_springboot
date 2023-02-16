@@ -68,6 +68,14 @@ public class UserController {
 		model.addAttribute(MODEL_ONE, rechUtil);
 		return "ajoututilisateur";
 	}
+	@GetMapping(ROUTE_DELETE)
+	public String supprimerUtilisateur(Model model,@PathVariable("id")int id){
+		User rechUtil = this.repository.findById(id).orElse(new User());
+		if (rechUtil !=null){
+			this.repository.deleteById(id);
+		}
+		return "redirect:/users/list";
+	}
 	/*
 	private User rechParId(int id){
 		User rechUtil = null;
